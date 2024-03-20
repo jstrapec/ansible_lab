@@ -1,0 +1,13 @@
+- name: On rhel 88 download repo file from NIM
+  hosts: rhel_8
+  tasks:
+    - name: Download repo file from DCSLA NIM   
+      get_url:
+        url: http://{{ nim_server }}/dnf/repo-files-rhel8/8.8/repoVLAN186/rhel88.repo
+        dest: /etc/yum.repos.d/foo.rhel88.repo
+        mode: '0640'
+    - name: Test if repo is working
+      yum:
+        name: vim
+        state: absent
+        update_cache: yes
