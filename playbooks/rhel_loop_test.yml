@@ -1,0 +1,12 @@
+---
+- name: Install multiple packages on system
+  hosts: rhel_8
+  gather_facts: false
+  tasks:
+    - name: Install multiple packages on system
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - telnet
+        - tmux

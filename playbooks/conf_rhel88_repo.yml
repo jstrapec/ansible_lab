@@ -11,3 +11,15 @@
         name: vim
         state: absent
         update_cache: yes
+- name: Install apache and start on AIX
+  hosts: aix
+  gather_facts: no
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: latest
+    - name: Start service
+      service:
+        name: httpd
+        state: active

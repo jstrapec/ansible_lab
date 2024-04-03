@@ -1,0 +1,25 @@
+---
+- name: Working with packages
+  hosts: rhel_8
+  gather_facts: false
+  tasks:
+    - name: Install package
+      dnf:
+        name: vim
+        state: present
+    - name: Update all packages
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+    - name: Gather facts about rpm packages
+      package_facts:
+        manager: auto
+    - name: Chcek if package httpd is installed or not
+      debug:
+        msg: Package httpd isn't installed
+      when: "'httpd' not in ansible_facts.packages"
+    - name: Chcek if package vim is installed or not
+      debug:
+        msg: Package for vim is installed
+      when: "'vim-enhanced' in ansible_facts.packages"

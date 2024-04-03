@@ -1,0 +1,12 @@
+- name: Install apache and start on AIX
+  hosts: jst_nfs_client
+  gather_facts: no
+  tasks:
+    - name: Install httpd
+      dnf:
+        name: httpd
+        state: latest
+    - name: Start service
+      service:
+        name: httpd
+        state: active

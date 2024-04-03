@@ -1,0 +1,18 @@
+- name: Install and start PSQL on RHEL
+  gather_facts: false
+  hosts: jst_nfs_rhel88
+  tasks:
+    - name: Install PSQL
+      dnf:
+        name: {{ item }}
+        state: absent
+      with_items:
+        - postgresql-server.ppc64le
+        - postgresql
+    - name: Check if PSQL is initialized
+      stat:
+        path: /var/lib/pgsql/data/pg_hba.conf
+      register: psql_init_stat
+    - name: Display value of file
+      debug:
+        msg: "{{ psql_init_stat }}"
