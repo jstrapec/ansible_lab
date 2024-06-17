@@ -1,4 +1,5 @@
 ---
+# Test note for git testing purposes
 - name: Working with user module
   gather_facts: false
   hosts: all
