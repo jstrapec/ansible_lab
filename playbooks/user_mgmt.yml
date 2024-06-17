@@ -1,0 +1,10 @@
+---
+- name: Working with user module
+  gather_facts: false
+  hosts: all
+  tasks:
+    - name: Create new user on all systems
+      user:
+        name: jst0417
+        uid: 1417
+        shell: /bin/bash
